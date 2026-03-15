@@ -8,7 +8,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ISAAC_URL="http://isaac.local:11437/v1"
-BAT00_URL="http://192.168.1.216:11435/v1"
+BAT00_URL="http://bat00.local:11435/v1"
 ISAAC_MODEL="qwen3.5-27b"
 BAT00_MODEL="qwen3.5:9b"
 
@@ -33,10 +33,19 @@ with open('$HOME/.openclaw/openclaw.json') as f:
     config = json.load(f)
 config['model']['baseUrl'] = '${INFERENCE_URL}'
 config['model']['model'] = '${INFERENCE_MODEL}'
+# Patch fleet MCP URL from env var for DHCP resilience
+try:
+    config['agents']['defaults']['mcp']['servers']['vertigo-fleet']['url'] = '${FLEET_MCP_URL}'
+except (KeyError, TypeError):
+    pass
 with open('$HOME/.openclaw/openclaw.json', 'w') as f:
     json.dump(config, f, indent=2)
 print('[Mac OpenClaw] Config updated: ${INFERENCE_URL} / ${INFERENCE_MODEL}')
 "
+
+# Fleet MCP URL — mDNS hostname with env var override
+FLEET_MCP_URL="${FLEET_MCP_URL:-http://Alejandros-Mac-mini.local:8850/mcp}"
+export FLEET_MCP_URL
 
 # Ensure fleet auth token is set
 if [ -z "${FLEET_AUTHORITY_TOKEN:-}" ]; then

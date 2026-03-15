@@ -8,7 +8,7 @@
     "// Routes over LAN: mac -> isaac:11437 (Obelisk) -> LM Studio (Qwen 27B)": "",
     "// Override with ANTHROPIC_API_KEY for cloud inference when needed": "",
     "provider": "openai-compatible",
-    "baseUrl": "http://192.168.1.251:11437/v1",
+    "baseUrl": "http://isaac.local:11437/v1",
     "model": "qwen3.5-27b",
     "apiKey": "not-needed"
   },
@@ -18,7 +18,7 @@
       "mcp": {
         "servers": {
           "vertigo-fleet": {
-            "url": "http://192.168.1.112:8850/mcp",
+            "url": "http://Alejandros-Mac-mini.local:8850/mcp",
             "headers": {
               "Authorization": "Bearer ${FLEET_AUTHORITY_TOKEN}"
             },
