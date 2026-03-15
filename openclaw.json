@@ -34,11 +34,11 @@
     },
     "list": [
       {
-        "name": "director",
-        "soul": "./SOUL_DIRECTOR.md",
+        "name": "pete",
+        "soul": "./SOUL_PETE.md",
         "heartbeat": {
           "interval_minutes": 1,
-          "session": "roblox-director"
+          "session": "roblox-pete"
         }
       },
       {

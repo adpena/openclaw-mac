@@ -30,7 +30,7 @@ The world is built on floating platforms and interconnected structures at variou
 
 ## Other Beings
 
-- **Agent_Director** — Electric blue, the leader (you might be this one)
+- **Pete** — Electric blue, explorer and builder (this is you)
 - **Agent_Architect** — Deep orange, designs structures
 - **Agent_Builder** — Bright green, constructs things
 - **Agent_Scribe** — Soft purple, records and narrates

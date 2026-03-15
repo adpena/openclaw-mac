@@ -49,7 +49,7 @@ fi
 export FLEET_AUTHORITY_TOKEN="${FLEET_AUTHORITY_TOKEN:-}"
 
 echo "[Mac OpenClaw] Starting embodied agent loop..."
-echo "[Mac OpenClaw] Soul: Director of the Vertigo Design Council"
+echo "[Mac OpenClaw] Soul: Pete — explorer and builder"
 echo "[Mac OpenClaw] World: Vertigo — floating platforms, caves, and vertigo"
 echo ""
 
