@@ -1,0 +1,62 @@
+{
+  "// OpenClaw configuration for Vertigo Fleet agent embodiment": "",
+  "// Install: npm install -g openclaw@latest && bash setup.sh": "",
+
+  "model": {
+    "// Tiered inference: fast local for perception, medium for decisions, cloud for planning": "",
+    "// OpenClaw runs on mac (old MacBook Pro), inference served by isaac (M5 Max 36GB)": "",
+    "// Routes over LAN: mac -> isaac:11437 (Obelisk) -> LM Studio (Qwen 27B)": "",
+    "// Override with ANTHROPIC_API_KEY for cloud inference when needed": "",
+    "provider": "openai-compatible",
+    "baseUrl": "http://192.168.1.251:11437/v1",
+    "model": "qwen3.5-27b",
+    "apiKey": "not-needed"
+  },
+
+  "agents": {
+    "defaults": {
+      "mcp": {
+        "servers": {
+          "vertigo-fleet": {
+            "url": "http://192.168.1.112:8850/mcp",
+            "headers": {
+              "Authorization": "Bearer ${FLEET_AUTHORITY_TOKEN}"
+            },
+            "transport": "http-sse"
+          },
+          "oac-capsule": {
+            "command": "uv",
+            "args": ["run", "--project", "${HOME}/PycharmProjects/oac", "python", "-m", "oac", "mcp", "${HOME}/PycharmProjects/oac/examples/vertigo-embodiment"],
+            "transport": "stdio"
+          }
+        }
+      }
+    },
+    "list": [
+      {
+        "name": "director",
+        "soul": "./SOUL_DIRECTOR.md",
+        "heartbeat": {
+          "interval_minutes": 1,
+          "session": "roblox-director"
+        }
+      },
+      {
+        "name": "explorer",
+        "soul": "./SOUL_EXPLORER.md",
+        "heartbeat": {
+          "interval_minutes": 2,
+          "session": "roblox-explorer"
+        }
+      }
+    ]
+  },
+
+  "context": {
+    "// Rolling window keeps last 10 turns, compacts older ones": "",
+    "maxTurns": 10,
+    "compactionStrategy": "summarize",
+    "// Memory files persist across sessions": "",
+    "memoryDir": "./memory"
+  }
+}
